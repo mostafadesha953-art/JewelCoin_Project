@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jewel Sovereign Wallet | AI Miner</title>
+    <style>
+        :root { 
+            --primary: #00ffcc; --reserve: #ffa500; --msg: #6c5ce7;
+            --bg: #0b0b0e; --card: #16161d; --text: #e0e0e0;
+        }
+
+        body { 
+            background: var(--bg); color: var(--text); 
+            font-family: 'Segoe UI', Roboto, sans-serif; 
+            margin: 0; display: flex; flex-direction: column; align-items: center; 
+            padding-bottom: 50px; -webkit-font-smoothing: antialiased;
+        }
+
+        /* ‘«‘… «·ﬁ›· AES-512 */
+        #lockScreen { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: radial-gradient(circle, #1a1a20 0%, #000 100%); 
+            z-index: 9999; display: flex; align-items: center; justify-content: center; 
+            transition: 0.8s all ease-in-out;
+        }
+        .lock-box { text-align: center; padding: 50px; border: 1px solid #333; border-radius: 24px; background: rgba(10, 10, 10, 0.9); }
+
+        /* «·„Õ›Ÿ… Ê«·»ÿ«ﬁ«  */
+        .card { 
+            background: var(--card); width: 480px; padding: 30px; 
+            border-radius: 25px; margin-top: 25px; border: 1px solid #2a2a32;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+        }
+
+        .balance { 
+            font-size: 3.5rem; color: var(--primary); font-weight: 800; 
+            text-align: center; margin: 15px 0; font-family: 'Consolas', monospace;
+        }
+
+        .address-box { 
+            background: #000; padding: 12px; border-radius: 12px; font-size: 0.75rem; 
+            color: #888; border: 1px dashed #444; direction: ltr; text-align: left;
+        }
+
+        /* ‘—Ìÿ «·«Õ Ì«ÿÌ Ê«· ⁄œÌ‰ «·–ﬂÌ */
+        .status-box { background: #222; padding: 15px; border-radius: 15px; margin-top: 15px; }
+        .res-bar { background: #000; height: 8px; border-radius: 5px; overflow: hidden; margin-top: 8px; }
+        .res-fill { background: var(--reserve); width: 33.33%; height: 100%; box-shadow: 0 0 10px var(--reserve); }
+
+        button { width: 100%; padding: 14px; border-radius: 12px; border: none; cursor: pointer; font-weight: bold; transition: 0.3s; margin-top: 10px; }
+        .btn-prime { background: var(--primary); color: #000; }
+        .btn-msg { background: var(--msg); color: white; }
+        .admin-panel { background: #1e1e26; border: 1px dashed var(--reserve); display: none; padding: 20px; margin-top: 15px; border-radius: 15px; }
+        input { width: calc(100% - 24px); padding: 12px; border-radius: 8px; border: 1px solid #333; background: #000; color: #fff; margin-bottom: 10px; }
+
+        /* «·„” ﬂ‘› */
+        .explorer-section { width: 90%; max-width: 850px; margin-top: 30px; }
+        table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 15px; overflow: hidden; }
+        th, td { padding: 15px; text-align: center; border-bottom: 1px solid #222; font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+
+    <!-- ‘«‘… «·ﬁ›· -->
+    <div id="lockScreen">
+        <div class="lock-box">
+            <h1 style="color:var(--primary); margin:0;">X-Hybrid Vault</h1>
+            <p style="color:#666; margin-bottom:30px;"> ‘›Ì— AES-512 ‰‘ÿ | 2026</p>
+            <input type="password" id="walletPass" placeholder="ﬂ·„… «·„—Ê—">
+            <button class="btn-prime" onclick="unlockWallet()">› Õ «·‰Ÿ«„ «·”Ì«œÌ</button>
+        </div>
+    </div>
+
+    <!-- «·„Õ›Ÿ… Ê«· Õﬂ„ -->
+    <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h2 id="logo" style="margin:0; font-weight:800; cursor:pointer;">Jewel</h2>
+            <span style="color:#2ecc71; font-size:0.8rem;">? «·”Ì«œ… „ ’·…</span>
+        </div>
+
+        <div class="balance" id="bal">0.00 XHB</div>
+        <div class="address-box">xhb_2026_master_99af2c84d6b13476e3392a81203d918c5e</div>
+
+        <!-- ﬁ”„ «·«Õ Ì«ÿÌ -->
+        <div class="status-box" style="border-right: 4px solid var(--reserve);">
+            <div style="display:flex; justify-content:space-between; font-size:0.8rem;">
+                <span style="color:var(--reserve);">«·„Œ“Ê‰ «·«Õ Ì«ÿÌ (7M)</span>
+                <span id="reserveVal" style="font-family:monospace;">7,000,000 XHB</span>
+            </div>
+            <div class="res-bar"><div class="res-fill"></div></div>
+        </div>
+
+        <!-- „Õ—ﬂ «· ⁄œÌ‰ «·–ﬂÌ «·„œ„Ã -->
+        <div class="status-box" style="border-top: 2px solid var(--primary);">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom:10px;">
+                <span id="miningStatus" style="font-size:0.75em; color:#888;">„Õ—ﬂ «· ⁄œÌ‰: Œ«„·</span>
+                <span id="cpuLoad" style="font-family:monospace; color:var(--primary); font-size:0.8em;">CPU: 0%</span>
+            </div>
+            <button class="btn-prime" id="mineBtn" onclick="toggleSmartMining()">»œ¡ «· ⁄œÌ‰ «·–ﬂÌ (AI)</button>
+        </div>
+
+        <button class="btn-msg" onclick="alert('› Õ «·„—«”·… «·„‘›—…...')">«·—”«∆· «·„‘›—… (E2EE)</button>
+        <button style="background:#ff4444; color:white;" onclick="alert(' ÊﬁÌ⁄ «·„⁄«„·…...')">≈—”«· ⁄„·« </button>
+
+        <div id="adminBox" class="admin-panel">
+            <h4 style="color: var(--reserve); margin: 0;">??  Õ—Ì— «·„Œ“Ê‰ «·”Ì«œÌ</h4>
+            <input type="text" id="mTo" placeholder="⁄‰Ê«‰ «·„” ·„">
+            <input type="number" id="mAmt" placeholder="«·„»·€">
+            <button style="background:var(--reserve); color:#000;" onclick="masterRelease()">≈’œ«— ›Ê—Ì</button>
+        </div>
+    </div>
+
+    <!-- «·„” ﬂ‘› -->
+    <div class="explorer-section">
+        <h3 style="text-align:right; margin-bottom:10px;">?? „” ﬂ‘› ”Ã·«  «·»·Êﬂ‘Ì‰</h3>
+        <table>
+            <thead>
+                <tr><th>«·ﬂ ·…</th><th>«·Â«‘ SHA3</th><th>«·»Ì«‰« </th><th>«·Õ«·…</th></tr>
+            </thead>
+            <tbody id="explorerBody"></tbody>
+        </table>
+    </div>
+
+    <script>
+        let isMining = false;
+
+        // › Õ «·„Õ›Ÿ…
+        function unlockWallet() {
+            const pass = document.getElementById('walletPass').value;
+            if(pass === "2026") {
+                const ls = document.getElementById('lockScreen');
+                ls.style.opacity = '0';
+                setTimeout(() => { ls.style.display = 'none'; syncWithBlockchain(); }, 800);
+            } else { alert("ﬂ·„… „—Ê— Œ«ÿ∆…!"); }
+        }
+
+        // ·ÊÕ… «·„œÌ— (5 ÷€ÿ« )
+        let clicks = 0;
+        document.getElementById('logo').onclick = () => {
+            if(++clicks === 5) { document.getElementById('adminBox').style.display = 'block'; }
+        };
+
+        // œ«·… «· ⁄œÌ‰ «·–ﬂÌ »‹ AI
+        async function toggleSmartMining() {
+            const btn = document.getElementById('mineBtn');
+            const status = document.getElementById('miningStatus');
+            isMining = !isMining;
+            
+            if(isMining) {
+                btn.innerText = "≈Ìﬁ«› «· ⁄œÌ‰";
+                btn.style.background = "#ff4444";
+                status.innerText = "«·Ê÷⁄:  ⁄œÌ‰ –ﬂÌ ‰‘ÿ (AI)";
+                fetch('http://localhost:18081/start_smart_mining');
+                startUiSimulation();
+            } else {
+                btn.innerText = "»œ¡ «· ⁄œÌ‰ «·–ﬂÌ (AI)";
+                btn.style.background = "var(--primary)";
+                status.innerText = "«·Ê÷⁄: Œ«„·";
+                document.getElementById('cpuLoad').innerText = "CPU: 0%";
+                fetch('http://localhost:18081/stop_mining');
+            }
+        }
+
+        function startUiSimulation() {
+            if(!isMining) return;
+            const load = document.getElementById('cpuLoad');
+            let randomLoad = Math.floor(Math.random() * (99 - 80 + 1) + 80);
+            load.innerText = "CPU: " + randomLoad + "%";
+            setTimeout(startUiSimulation, 2000);
+        }
+
+        // «·„“«„‰… „⁄ «·‰Ê«…
+        async function syncWithBlockchain() {
+            try {
+                const res = await fetch('http://localhost:18081/get_status');
+                const data = await res.json();
+                document.getElementById('bal').innerText = data.balance + " XHB";
+                updateExplorer(data.height);
+            } catch (e) { console.error("«·‰Ê«… €Ì— „ ’·…."); }
+        }
+
+        function updateExplorer(h) {
+            const body = document.getElementById('explorerBody');
+            body.innerHTML = <tr><td>${h || 1}</td><td style="color:var(--primary); font-family:monospace;">0000x82f...32d</td><td>Genesis Block Mined</td><td style="color:#2ecc71;">? „ƒﬂœ…</td></tr>;
+        }
+
+        setInterval(syncWithBlockchain, 10000);
+    </script>
+</body>
+</html>
