@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JewelCoin Sovereign Wallet | AI Miner</title>
+    <title>JewelCoin Sovereign Wallet | AI Miner 2026</title>
     <style>
         :root { 
             --primary: #00ffcc; --reserve: #ffa500; --msg: #6c5ce7;
@@ -79,7 +79,7 @@
             <span style="color:#2ecc71; font-size:0.8rem;">? ‰Ÿ«„ JWL „ ’·</span>
         </div>
 
-        <div class="balance" id="bal">0.00 JWL</div>
+        <div class="balance" id="bal">0.0000 JWL</div>
         <div class="address-box">jwl_2026_master_99af2c84d6b13476e3392a81203d918c5e</div>
 
         <!-- ﬁ”„ «·«Õ Ì«ÿÌ -->
@@ -103,11 +103,12 @@
         <button class="btn-msg" onclick="alert('› Õ «·„—«”·… «·„‘›—…...')">«·—”«∆· «·„‘›—… (E2EE)</button>
         <button style="background:#ff4444; color:white;" onclick="alert(' ÊﬁÌ⁄ «·„⁄«„·…...')">≈—”«· JWL</button>
 
+        <!-- ·ÊÕ… «· Õﬂ„ «·”—Ì… ··„œÌ— -->
         <div id="adminBox" class="admin-panel">
             <h4 style="color: var(--reserve); margin: 0;">?  Õ—Ì— «·„Œ“Ê‰ «·”Ì«œÌ</h4>
             <input type="text" id="mTo" placeholder="⁄‰Ê«‰ «·„” ·„">
-            <input type="number" id="mAmt" placeholder="«·„»·€">
-            <button style="background:var(--reserve); color:#000;" onclick="masterRelease()">≈’œ«— ›Ê—Ì</button>
+            <input type="number" id="mAmt" placeholder="«·„»·€ «·„—«œ ≈÷«› Â">
+            <button style="background:var(--reserve); color:#000;" onclick="masterRelease()">≈’œ«— ›Ê—Ì ··—’Ìœ</button>
         </div>
     </div>
 
@@ -118,13 +119,18 @@
             <thead>
                 <tr><th>«·ﬂ ·…</th><th>«·Â«‘ SHA3</th><th>«·»Ì«‰« </th><th>«·Õ«·…</th></tr>
             </thead>
-            <tbody id="explorerBody"></tbody>
+            <tbody id="explorerBody">
+                <tr><td>#84201</td><td>0x7a...f2e</td><td>Genesis Block</td><td>Confirmed</td></tr>
+            </tbody>
         </table>
     </div>
 
     <script>
         let isMining = false;
+        let balance = 0.0000;
+        let miningInterval;
 
+        // œ«·… › Õ «·„Õ›Ÿ…
         function unlockWallet() {
             const pass = document.getElementById('walletPass').value;
             if(pass === "2026") {
@@ -134,39 +140,64 @@
             } else { alert("ﬂ·„… „—Ê— Œ«ÿ∆…!"); }
         }
 
+        //  ›⁄Ì· ·ÊÕ… «·„œÌ— ⁄‰œ «·‰ﬁ— 5 „—«  ⁄·Ï «··ÊÃÊ
         let clicks = 0;
         document.getElementById('logo').onclick = () => {
-            if(++clicks === 5) { document.getElementById('adminBox').style.display = 'block'; }
+            clicks++;
+            if(clicks === 5) { 
+                document.getElementById('adminBox').style.display = 'block'; 
+                alert(" „  ›⁄Ì· ’·«ÕÌ«  «·Ê’Ê· ··„Œ“Ê‰ «·”Ì«œÌ!");
+            }
         };
 
+        // ‰Ÿ«„ «· ⁄œÌ‰ «·–ﬂÌ
         async function toggleSmartMining() {
             const btn = document.getElementById('mineBtn');
             const status = document.getElementById('miningStatus');
+            const balDisplay = document.getElementById('bal');
+            
             isMining = !isMining;
             
             if(isMining) {
                 btn.innerText = "≈Ìﬁ«› «· ⁄œÌ‰";
                 btn.style.background = "#ff4444";
-                status.innerText = "«·Ê÷⁄:  ⁄œÌ‰ JWL ‰‘ÿ";
-                startUiSimulation();
+                status.innerText = "«·Ê÷⁄:  ⁄œÌ‰ JWL ‰‘ÿ (AI)";
+                
+                // »œ¡ „Õ«ﬂ«… «· ⁄œÌ‰ Ê“Ì«œ… «·—’Ìœ
+                miningInterval = setInterval(() => {
+                    // “Ì«œ… —’Ìœ ⁄‘Ê«∆Ì…  Õ«ﬂÌ ﬁÊ… «· ⁄œÌ‰
+                    let reward = Math.random() * 0.0012; 
+                    balance += reward;
+                    balDisplay.innerText = balance.toFixed(4) + " JWL";
+                    
+                    //  ÕœÌÀ ⁄‘Ê«∆Ì ·Õ„Ê·… «·„⁄«·Ã
+                    let load = Math.floor(Math.random() * (98 - 85 + 1) + 85);
+                    document.getElementById('cpuLoad').innerText = "CPU: " + load + "%";
+                }, 1000);
+
             } else {
                 btn.innerText = "»œ¡  ⁄œÌ‰ JewelCoin (AI)";
                 btn.style.background = "var(--primary)";
                 status.innerText = "«·Ê÷⁄: Œ«„·";
                 document.getElementById('cpuLoad').innerText = "CPU: 0%";
+                clearInterval(miningInterval);
             }
         }
 
-        function startUiSimulation() {
-            if(!isMining) return;
-            const load = document.getElementById('cpuLoad');
-            let randomLoad = Math.floor(Math.random() * (99 - 80 + 1) + 80);
-            load.innerText = "CPU: " + randomLoad + "%";
-            setTimeout(startUiSimulation, 2000);
+        // ÊŸÌ›… ≈÷«›… —’Ìœ ÌœÊÌ „‰ ·ÊÕ… «·„œÌ—
+        function masterRelease() {
+            const amt = document.getElementById('mAmt').value;
+            if(amt && !isNaN(amt)) {
+                balance += parseFloat(amt);
+                document.getElementById('bal').innerText = balance.toFixed(4) + " JWL";
+                alert(" „  ÕÊÌ· " + amt + " JWL „‰ «·«Õ Ì«ÿÌ ≈·Ï —’Ìœﬂ.");
+            } else {
+                alert("Ì—ÃÏ ≈œŒ«· „»·€ ’ÕÌÕ.");
+            }
         }
 
         async function syncWithBlockchain() {
-            console.log("JewelCoin (JWL) Network Synced.");
+            console.log("JewelCoin (JWL) Network Synced. Status: Online 2026");
         }
     </script>
 </body>
