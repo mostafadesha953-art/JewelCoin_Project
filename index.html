@@ -1,7 +1,9 @@
 <!DOCTYPE html>
+<!-- ≈÷«›… «· ‘›Ì— ·÷„«‰ ŸÂÊ— «··€… «·⁄—»Ì… -->
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JewelCoin AI Sovereign | 2026</title>
     <style>
@@ -12,101 +14,92 @@
 
         body { 
             background: var(--bg); color: var(--text); 
-            font-family: 'Segoe UI', Roboto, sans-serif; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
             margin: 0; display: flex; flex-direction: column; align-items: center; 
             padding-bottom: 50px;
         }
 
         #lockScreen { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: radial-gradient(circle, #1a1a20 0%, #000 100%); 
-            z-index: 9999; display: flex; align-items: center; justify-content: center; 
-            transition: 0.8s all ease-in-out;
+            background: #000; z-index: 9999; display: flex; align-items: center; justify-content: center; 
+            transition: 0.5s;
         }
-        .lock-box { text-align: center; padding: 50px; border: 1px solid #333; border-radius: 24px; background: rgba(10, 10, 10, 0.9); }
+        .lock-box { text-align: center; padding: 40px; border: 1px solid #333; border-radius: 20px; background: #0a0a0a; }
 
         .card { 
-            background: var(--card); width: 480px; padding: 30px; 
+            background: var(--card); width: 90%; max-width: 450px; padding: 25px; 
             border-radius: 25px; margin-top: 25px; border: 1px solid #2a2a32;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6); position: relative; overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5); position: relative;
         }
-
-        /*  √ÀÌ— ‰»÷ «·‹ AI */
-        .ai-pulse {
-            position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(0, 212, 255, 0.05) 0%, transparent 70%);
-            display: none; animation: pulse 3s infinite linear; pointer-events: none;
-        }
-        @keyframes pulse { 0% { transform: scale(0.5); opacity: 0; } 50% { opacity: 1; } 100% { transform: scale(1.2); opacity: 0; } }
 
         .balance { 
-            font-size: 3.5rem; color: var(--primary); font-weight: 800; 
-            text-align: center; margin: 15px 0; font-family: 'Consolas', monospace;
-            text-shadow: 0 0 15px rgba(0, 255, 204, 0.3);
+            font-size: 3rem; color: var(--primary); font-weight: 800; 
+            text-align: center; margin: 15px 0; font-family: monospace;
         }
 
-        .status-box { background: #222; padding: 15px; border-radius: 15px; margin-top: 15px; border: 1px solid transparent; transition: 0.5s; }
-        .mining-active { border-color: var(--ai-glow); box-shadow: 0 0 15px rgba(0, 212, 255, 0.2); }
-
-        .ai-status-bar { height: 4px; background: #000; border-radius: 2px; margin: 10px 0; overflow: hidden; }
-        .ai-progress { width: 0%; height: 100%; background: var(--ai-glow); transition: 0.3s; }
-
-        button { width: 100%; padding: 14px; border-radius: 12px; border: none; cursor: pointer; font-weight: bold; transition: 0.3s; margin-top: 10px; }
+        .status-box { background: #222; padding: 15px; border-radius: 15px; margin-top: 15px; border: 1px solid transparent; }
+        
+        button { width: 100%; padding: 14px; border-radius: 12px; border: none; cursor: pointer; font-weight: bold; margin-top: 10px; font-family: inherit; }
         .btn-prime { background: var(--primary); color: #000; }
         .btn-ai { background: var(--ai-glow); color: #000; display: none; }
 
-        .address-box { background: #000; padding: 12px; border-radius: 12px; font-size: 0.75rem; color: #888; border: 1px dashed #444; direction: ltr; }
+        input { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #333; background: #000; color: #fff; margin-bottom: 10px; box-sizing: border-box; text-align: center; }
+        
+        .address-box { background: #000; padding: 10px; border-radius: 10px; font-size: 0.7rem; color: #888; word-break: break-all; text-align: center; border: 1px dashed #444; }
     </style>
 </head>
 <body>
 
+    <!-- ‘«‘… «·ﬁ›· «·„ÕœÀ… -->
     <div id="lockScreen">
         <div class="lock-box">
-            <h1 style="color:var(--primary); margin:0;">JewelCoin AI Vault</h1>
-            <p style="color:#666; margin-bottom:30px;"> ‘›Ì— ⁄’»Ì ‰‘ÿ | ›»—«Ì— 2026</p>
-            <input type="password" id="walletPass" placeholder="ﬂ·„… «·„—Ê— (2026)">
-            <button class="btn-prime" onclick="unlockWallet()">› Õ «·‰Ÿ«„ «·”Ì«œÌ</button>
+            <h2 style="color:var(--primary);">‰Ÿ«„ JewelCoin «·¬„‰</h2>
+            <p style="color:#888;">√œŒ· «·—„“ «·”—Ì ··Ê’Ê· (2026)</p>
+            <input type="password" id="walletPass" placeholder="«·—„“ «·”—Ì">
+            <button class="btn-prime" onclick="unlockWallet()">œŒÊ· ¬„‰</button>
         </div>
     </div>
 
-    <div class="card" id="mainCard">
-        <div class="ai-pulse" id="pulseEffect"></div>
+    <div class="card">
         <div style="display:flex; justify-content:space-between; align-items:center;">
             <h2 id="logo" style="margin:0; font-weight:800; cursor:pointer;">JewelCoin</h2>
-            <span id="netStatus" style="color:#2ecc71; font-size:0.8rem;">? „ ’·: 2026_CORE</span>
+            <span style="color:#2ecc71; font-size:0.7rem;">? ‰Ÿ«„ 2026 ‰‘ÿ</span>
         </div>
 
         <div class="balance" id="bal">0.0000 JWL</div>
-        <div class="address-box">jwl_2026_ai_optimized_f2918c5e_master</div>
+        <div class="address-box">jwl_2026_ai_optimized_master_node</div>
 
         <div class="status-box" id="miningBox">
             <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--ai-glow);">
-                <span>„Õ—ﬂ «·‹ AI: <b id="aiMode">«‰ Ÿ«—</b></span>
-                <span id="cpuLoad">Temp: 32∞C</span>
+                <span>«·–ﬂ«¡ «·«’ÿ‰«⁄Ì: <b id="aiMode">Œ«„·</b></span>
+                <span id="cpuStatus">Temp: 30∞C</span>
             </div>
-            <div class="ai-status-bar"><div class="ai-progress" id="aiBar"></div></div>
             
-            <button class="btn-prime" id="mineBtn" onclick="toggleAiMining()"> ›⁄Ì· «· ⁄œÌ‰ »«·–ﬂ«¡ «·«’ÿ‰«⁄Ì</button>
-            <button class="btn-ai" id="boostBtn" onclick="boostAi()"> ›⁄Ì· Ê÷⁄ «·√œ«¡ «·√ﬁ’Ï (AI Boost)</button>
+            <button class="btn-prime" id="mineBtn" onclick="toggleAiMining()"> ‘€Ì· «· ⁄œÌ‰ «·–ﬂÌ</button>
+            <button class="btn-ai" id="boostBtn" onclick="boostAi()"> ›⁄Ì· «· ”—Ì⁄ (AI Boost)</button>
         </div>
 
-        <div id="adminBox" style="display:none; margin-top:15px; padding:15px; border:1px dashed orange; border-radius:10px;">
-            <input type="number" id="mAmt" placeholder="≈÷«›… —’Ìœ">
-            <button style="background:orange;" onclick="balance += parseFloat(document.getElementById('mAmt').value)">≈’œ«— ›Ê—Ì</button>
+        <!-- ·ÊÕ… «·≈œ«—… «·”—Ì… -->
+        <div id="adminBox" style="display:none; margin-top:15px; border:1px dashed orange; padding:10px; border-radius:10px;">
+            <input type="number" id="mAmt" placeholder="ﬂ„Ì… «·⁄„·« ">
+            <button style="background:orange; color:black;" onclick="addBalance()">≈÷«›… ›Ê—Ì… ··—’Ìœ</button>
         </div>
     </div>
 
     <script>
+        let balance = 0.0;
         let isMining = false;
         let isBoosted = false;
-        let balance = 0.0000;
-        let aiLoop;
-        let temp = 32;
+        let aiInterval;
 
+        // ÊŸÌ›… › Õ «·ﬁ›· «·„»”ÿ…
         function unlockWallet() {
-            if(document.getElementById('walletPass').value === "2026") {
-                document.getElementById('lockScreen').style.opacity = '0';
-                setTimeout(() => { document.getElementById('lockScreen').style.display = 'none'; }, 800);
+            const passInput = document.getElementById('walletPass').value;
+            //  ﬁ»· 2026 ”Ê«¡ ﬂ«‰  «·√—ﬁ«„ ≈‰Ã·Ì“Ì… √Ê √Ì  ‰”Ìﬁ ‰’Ì
+            if (passInput == "2026") {
+                document.getElementById('lockScreen').style.display = 'none';
+            } else {
+                alert("«·—„“ €Ì— ’ÕÌÕ° Õ«Ê· „—… √Œ—Ï.");
             }
         }
 
@@ -114,70 +107,56 @@
             isMining = !isMining;
             const btn = document.getElementById('mineBtn');
             const boostBtn = document.getElementById('boostBtn');
-            const box = document.getElementById('miningBox');
-            const pulse = document.getElementById('pulseEffect');
 
             if(isMining) {
                 btn.innerText = "≈Ìﬁ«› «·„Õ—ﬂ";
                 btn.style.background = "#ff4444";
                 boostBtn.style.display = "block";
-                box.classList.add('mining-active');
-                pulse.style.display = "block";
-                startAiEngine();
+                startEngine();
             } else {
-                clearInterval(aiLoop);
-                btn.innerText = " ›⁄Ì· «· ⁄œÌ‰ »«·–ﬂ«¡ «·«’ÿ‰«⁄Ì";
+                clearInterval(aiInterval);
+                btn.innerText = " ‘€Ì· «· ⁄œÌ‰ «·–ﬂÌ";
                 btn.style.background = "var(--primary)";
                 boostBtn.style.display = "none";
-                box.classList.remove('mining-active');
-                pulse.style.display = "none";
-                document.getElementById('aiMode').innerText = "«‰ Ÿ«—";
-                document.getElementById('aiBar').style.width = "0%";
+                document.getElementById('aiMode').innerText = "Œ«„·";
             }
         }
 
-        function startAiEngine() {
-            aiLoop = setInterval(() => {
-                // „‰ÿﬁ «·‹ AI: «· ⁄œÌ‰ »”—⁄«  „ €Ì—… ·„‰⁄  Ã„Ìœ «·„ ’›Õ
-                let multiplier = isBoosted ? 50 : 5;
-                let reward = (Math.random() * 0.0002) * multiplier;
-                balance += reward;
-                
+        function startEngine() {
+            aiInterval = setInterval(() => {
+                let speed = isBoosted ? 0.05 : 0.001;
+                balance += (Math.random() * speed);
                 document.getElementById('bal').innerText = balance.toFixed(4) + " JWL";
                 
-                // „Õ«ﬂ«… «” ﬁ—«— œ—Ã… «·Õ—«—… Ê«·‹ CPU
-                if(isBoosted) {
-                    temp = Math.min(temp + 0.1, 78);
-                    document.getElementById('aiMode').innerText = "√œ«¡ √ﬁ’Ï ( Õ·Ì· ‰‘ÿ)";
-                    document.getElementById('aiBar').style.width = Math.random() * 40 + 60 + "%";
-                } else {
-                    temp = Math.max(temp - 0.1, 40);
-                    document.getElementById('aiMode').innerText = " Õ”Ì‰ „” „—";
-                    document.getElementById('aiBar').style.width = Math.random() * 30 + 10 + "%";
-                }
-                
-                document.getElementById('cpuLoad').innerText = Temp: ${temp.toFixed(1)}∞C | Optimized;
-            }, 800);
+                let temp = isBoosted ? (Math.random()*10 + 65) : (Math.random()*5 + 35);
+                document.getElementById('cpuStatus').innerText = "Temp: " + temp.toFixed(1) + "∞C";
+                document.getElementById('aiMode').innerText = isBoosted ? "√œ«¡ √ﬁ’Ï" : " Õ”Ì‰ „” „—";
+            }, 1000);
         }
 
         function boostAi() {
             isBoosted = !isBoosted;
-            const bBtn = document.getElementById('boostBtn');
-            if(isBoosted) {
-                bBtn.innerText = " ⁄ÿÌ· «·‹ Boost (Õ›«Ÿ ⁄·Ï «·ÿ«ﬁ…)";
-                bBtn.style.background = "#ffcc00";
-                document.getElementById('netStatus').innerText = "? ‰Ÿ«„ AI: ‰„ÿ «· Ê—»Ê";
-                document.getElementById('netStatus').style.color = "orange";
-            } else {
-                bBtn.innerText = " ›⁄Ì· Ê÷⁄ «·√œ«¡ «·√ﬁ’Ï (AI Boost)";
-                bBtn.style.background = "var(--ai-glow)";
-                document.getElementById('netStatus').innerText = "? „ ’·: 2026_CORE";
-                document.getElementById('netStatus').style.color = "#2ecc71";
-            }
+            document.getElementById('boostBtn').innerText = isBoosted ? " ⁄ÿÌ· «· ”—Ì⁄" : " ›⁄Ì· «· ”—Ì⁄ (AI Boost)";
+            document.getElementById('boostBtn').style.background = isBoosted ? "orange" : "var(--ai-glow)";
         }
 
-        // ·ÊÕ… ”—Ì…
-        let c = 0; document.getElementById('logo').onclick = () => { if(++c === 5) document.getElementById('adminBox').style.display='block'; };
+        // ·ÊÕ… «·≈œ«—… (5 ‰ﬁ—«  ⁄·Ï «··ÊÃÊ)
+        let c = 0;
+        document.getElementById('logo').onclick = () => {
+            c++;
+            if(c === 5) {
+                document.getElementById('adminBox').style.display = 'block';
+                alert(" „  ›⁄Ì· Ê÷⁄ «·„”ƒÊ·.");
+            }
+        };
+
+        function addBalance() {
+            const val = document.getElementById('mAmt').value;
+            if(val) {
+                balance += parseFloat(val);
+                document.getElementById('bal').innerText = balance.toFixed(4) + " JWL";
+            }
+        }
     </script>
 </body>
 </html>
