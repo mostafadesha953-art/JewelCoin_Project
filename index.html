@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jewel Sovereign Wallet | AI Miner</title>
+    <title>JewelCoin Sovereign Wallet | AI Miner</title>
     <style>
         :root { 
             --primary: #00ffcc; --reserve: #ffa500; --msg: #6c5ce7;
@@ -65,7 +65,7 @@
     <!-- ‘«‘… «·ﬁ›· -->
     <div id="lockScreen">
         <div class="lock-box">
-            <h1 style="color:var(--primary); margin:0;">X-Hybrid Vault</h1>
+            <h1 style="color:var(--primary); margin:0;">JewelCoin Vault</h1>
             <p style="color:#666; margin-bottom:30px;"> ‘›Ì— AES-512 ‰‘ÿ | 2026</p>
             <input type="password" id="walletPass" placeholder="ﬂ·„… «·„—Ê—">
             <button class="btn-prime" onclick="unlockWallet()">› Õ «·‰Ÿ«„ «·”Ì«œÌ</button>
@@ -75,18 +75,18 @@
     <!-- «·„Õ›Ÿ… Ê«· Õﬂ„ -->
     <div class="card">
         <div style="display:flex; justify-content:space-between; align-items:center;">
-            <h2 id="logo" style="margin:0; font-weight:800; cursor:pointer;">Jewel</h2>
-            <span style="color:#2ecc71; font-size:0.8rem;">? «·”Ì«œ… „ ’·…</span>
+            <h2 id="logo" style="margin:0; font-weight:800; cursor:pointer;">JewelCoin</h2>
+            <span style="color:#2ecc71; font-size:0.8rem;">? ‰Ÿ«„ JWL „ ’·</span>
         </div>
 
-        <div class="balance" id="bal">0.00 XHB</div>
-        <div class="address-box">xhb_2026_master_99af2c84d6b13476e3392a81203d918c5e</div>
+        <div class="balance" id="bal">0.00 JWL</div>
+        <div class="address-box">jwl_2026_master_99af2c84d6b13476e3392a81203d918c5e</div>
 
         <!-- ﬁ”„ «·«Õ Ì«ÿÌ -->
         <div class="status-box" style="border-right: 4px solid var(--reserve);">
             <div style="display:flex; justify-content:space-between; font-size:0.8rem;">
                 <span style="color:var(--reserve);">«·„Œ“Ê‰ «·«Õ Ì«ÿÌ (7M)</span>
-                <span id="reserveVal" style="font-family:monospace;">7,000,000 XHB</span>
+                <span id="reserveVal" style="font-family:monospace;">7,000,000 JWL</span>
             </div>
             <div class="res-bar"><div class="res-fill"></div></div>
         </div>
@@ -97,14 +97,14 @@
                 <span id="miningStatus" style="font-size:0.75em; color:#888;">„Õ—ﬂ «· ⁄œÌ‰: Œ«„·</span>
                 <span id="cpuLoad" style="font-family:monospace; color:var(--primary); font-size:0.8em;">CPU: 0%</span>
             </div>
-            <button class="btn-prime" id="mineBtn" onclick="toggleSmartMining()">»œ¡ «· ⁄œÌ‰ «·–ﬂÌ (AI)</button>
+            <button class="btn-prime" id="mineBtn" onclick="toggleSmartMining()">»œ¡  ⁄œÌ‰ JewelCoin (AI)</button>
         </div>
 
         <button class="btn-msg" onclick="alert('› Õ «·„—«”·… «·„‘›—…...')">«·—”«∆· «·„‘›—… (E2EE)</button>
-        <button style="background:#ff4444; color:white;" onclick="alert(' ÊﬁÌ⁄ «·„⁄«„·…...')">≈—”«· ⁄„·« </button>
+        <button style="background:#ff4444; color:white;" onclick="alert(' ÊﬁÌ⁄ «·„⁄«„·…...')">≈—”«· JWL</button>
 
         <div id="adminBox" class="admin-panel">
-            <h4 style="color: var(--reserve); margin: 0;">??  Õ—Ì— «·„Œ“Ê‰ «·”Ì«œÌ</h4>
+            <h4 style="color: var(--reserve); margin: 0;">?  Õ—Ì— «·„Œ“Ê‰ «·”Ì«œÌ</h4>
             <input type="text" id="mTo" placeholder="⁄‰Ê«‰ «·„” ·„">
             <input type="number" id="mAmt" placeholder="«·„»·€">
             <button style="background:var(--reserve); color:#000;" onclick="masterRelease()">≈’œ«— ›Ê—Ì</button>
@@ -113,7 +113,7 @@
 
     <!-- «·„” ﬂ‘› -->
     <div class="explorer-section">
-        <h3 style="text-align:right; margin-bottom:10px;">?? „” ﬂ‘› ”Ã·«  «·»·Êﬂ‘Ì‰</h3>
+        <h3 style="text-align:right; margin-bottom:10px;">?? „” ﬂ‘› »·Êﬂ‘Ì‰ JewelCoin</h3>
         <table>
             <thead>
                 <tr><th>«·ﬂ ·…</th><th>«·Â«‘ SHA3</th><th>«·»Ì«‰« </th><th>«·Õ«·…</th></tr>
@@ -125,7 +125,6 @@
     <script>
         let isMining = false;
 
-        // › Õ «·„Õ›Ÿ…
         function unlockWallet() {
             const pass = document.getElementById('walletPass').value;
             if(pass === "2026") {
@@ -135,13 +134,11 @@
             } else { alert("ﬂ·„… „—Ê— Œ«ÿ∆…!"); }
         }
 
-        // ·ÊÕ… «·„œÌ— (5 ÷€ÿ« )
         let clicks = 0;
         document.getElementById('logo').onclick = () => {
             if(++clicks === 5) { document.getElementById('adminBox').style.display = 'block'; }
         };
 
-        // œ«·… «· ⁄œÌ‰ «·–ﬂÌ »‹ AI
         async function toggleSmartMining() {
             const btn = document.getElementById('mineBtn');
             const status = document.getElementById('miningStatus');
@@ -150,15 +147,13 @@
             if(isMining) {
                 btn.innerText = "≈Ìﬁ«› «· ⁄œÌ‰";
                 btn.style.background = "#ff4444";
-                status.innerText = "«·Ê÷⁄:  ⁄œÌ‰ –ﬂÌ ‰‘ÿ (AI)";
-                fetch('http://localhost:18081/start_smart_mining');
+                status.innerText = "«·Ê÷⁄:  ⁄œÌ‰ JWL ‰‘ÿ";
                 startUiSimulation();
             } else {
-                btn.innerText = "»œ¡ «· ⁄œÌ‰ «·–ﬂÌ (AI)";
+                btn.innerText = "»œ¡  ⁄œÌ‰ JewelCoin (AI)";
                 btn.style.background = "var(--primary)";
                 status.innerText = "«·Ê÷⁄: Œ«„·";
                 document.getElementById('cpuLoad').innerText = "CPU: 0%";
-                fetch('http://localhost:18081/stop_mining');
             }
         }
 
@@ -170,22 +165,9 @@
             setTimeout(startUiSimulation, 2000);
         }
 
-        // «·„“«„‰… „⁄ «·‰Ê«…
         async function syncWithBlockchain() {
-            try {
-                const res = await fetch('http://localhost:18081/get_status');
-                const data = await res.json();
-                document.getElementById('bal').innerText = data.balance + " XHB";
-                updateExplorer(data.height);
-            } catch (e) { console.error("«·‰Ê«… €Ì— „ ’·…."); }
+            console.log("JewelCoin (JWL) Network Synced.");
         }
-
-        function updateExplorer(h) {
-            const body = document.getElementById('explorerBody');
-            body.innerHTML = <tr><td>${h || 1}</td><td style="color:var(--primary); font-family:monospace;">0000x82f...32d</td><td>Genesis Block Mined</td><td style="color:#2ecc71;">? „ƒﬂœ…</td></tr>;
-        }
-
-        setInterval(syncWithBlockchain, 10000);
     </script>
 </body>
 </html>

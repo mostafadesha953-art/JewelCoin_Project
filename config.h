@@ -1,13 +1,13 @@
 // «”„ «·„·›: config.h
-#ifndef XHYBRID_CONFIG_H
-#define XHYBRID_CONFIG_H
+#ifndef JewelCoin_CONFIG_H
+#define JewelCoin_CONFIG_H
 
 #include <string>
 
-namespace XHybrid {
+namespace JewelCoin {
     // «·ÂÊÌ… Ê«·√„«‰
     const char* const NAME = "JewelCoin";
-    const char* const SYMBOL = "XHB";
+    const char* const SYMBOL = "JWL";
 
     // «·«ﬁ ’«œ «·—ﬁ„Ì (Tokenomics 2026)
     const uint64_t MAX_SUPPLY = 21000000;    // «·„Ã„Ê⁄ «·ﬂ·Ì

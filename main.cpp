@@ -26,30 +26,30 @@ public:
     }
 
     // œ«·… Õ”«» «·Â«‘ «·ÂÃÌ‰ (SHA3 + RandomX «· ŒÌ·Ì)
-    std::string calculateHybridHash(Block& b) {
+    std::string calculateJewelHash(Block& b) {
         std::string record = std::to_string(b.index) + b.prevHash + b.data + std::to_string(b.nonce);
         // „Õ«ﬂ«… ·· ‘›Ì— «·⁄«·Ì - ›Ì «·‰”Œ… «·›⁄·Ì…  ı” œ⁄Ï „ﬂ »… SHA3
         return std::to_string(std::hash<std::string>{}(record)); 
     }
 
-    // „—Õ·… ≈ÿ·«ﬁ √Ê· ⁄„·… X-Hybrid (Genesis Mining)
+    // „—Õ·… ≈ÿ·«ﬁ √Ê· ⁄„·… JewelCoin (Genesis Mining)
     void mineFirstBlock() {
         Block genesis;
         genesis.index = 0;
-        genesis.data = "X-Hybrid Genesis Block - Private Era 2026";
+        genesis.data = "JewelCoin Genesis Block - Private Era 2026";
         genesis.prevHash = "00000000000000000000000000000000";
         genesis.nonce = 0;
 
         std::cout << "[!] Ã«—Ì «·»ÕÀ ⁄‰ √Ê· ⁄„·…... ( ⁄œÌ‰ CPU –ﬂÌ ‰‘ÿ)" << std::endl;
 
         while (true) {
-            genesis.hash = calculateHybridHash(genesis);
+            genesis.hash = calculateJewelHash(genesis);
             
             // ‘—ÿ «·’⁄Ê»…: «·Â«‘ Ì»œ√ »‹ "0000" (ﬂ„« ÂÊ „Õœœ ›Ì config.h)
             if (genesis.hash.substr(0, 4) == "0000") {
                 std::cout << "? ‰Ã«Õ!  „  ⁄œÌ‰ √Ê· ﬂ ·… ”Ì«œÌ…." << std::endl;
                 std::cout << "?? «·Â«‘: " << genesis.hash << std::endl;
-                std::cout << "?? «·„ﬂ«›√… «·√Ê·Ï «·„÷«›… ··„Õ›Ÿ…: 50 XHB" << std::endl;
+                std::cout << "?? «·„ﬂ«›√… «·√Ê·Ï «·„÷«›… ··„Õ›Ÿ…: 50 JWL" << std::endl;
                 
                 walletBalance += 50.0; // ≈÷«›… «·„ﬂ«›√… ··—’Ìœ
                 chain.push_back(genesis);
@@ -73,7 +73,7 @@ public:
         newBlock.nonce = 0;
 
         while (true) {
-            newBlock.hash = calculateHybridHash(newBlock);
+            newBlock.hash = calculateJewelHash(newBlock);
             if (newBlock.hash.substr(0, 4) == "0000") {
                 chain.push_back(newBlock);
                 break;
@@ -85,30 +85,30 @@ public:
 
 // [3]  ‘€Ì· «·”Ì—›— Ê«·—»ÿ »«·Ê«ÃÂ…
 int main() {
-    Blockchain xhb; // ”ÌﬁÊ„  ·ﬁ«∆Ì« » ⁄œÌ‰ √Ê· ﬂ ·… ⁄‰œ «·»œ¡
+    Blockchain jwl; // ”ÌﬁÊ„  ·ﬁ«∆Ì« » ⁄œÌ‰ √Ê· ﬂ ·… ⁄‰œ «·»œ¡
     crow::SimpleApp app;
 
     // „”«— Ã·» «·»Ì«‰«  «·„ÕœÀ… ··„Õ›Ÿ… («·—’Ìœ Ê«·«Õ Ì«ÿÌ)
     CROW_ROUTE(app, "/status")([&](){
         crow::json::wvalue res;
-        res["balance"] = std::to_string(xhb.walletBalance);
+        res["balance"] = std::to_string(jwl.walletBalance);
         res["reserve"] = "7000000"; // «·‹ 7 „·ÌÊ‰ «Õ Ì«ÿÌ À«» … »—„ÃÌ«
-        res["height"] = xhb.chain.size();
+        res["height"] = jwl.chain.size();
         return res;
     });
 
     // „”«— «· Õﬂ„ «·”Ì«œÌ ›Ì «·«Õ Ì«ÿÌ (Admin Only)
     CROW_ROUTE(app, "/admin_release").methods("POST"_method)([&](const crow::request& req){
         auto x = crow::json::load(req.body);
-        if (x["auth"].s() == XHybrid::MASTER_KEY) {
-            xhb.addBlock("Reserve Release: " + std::to_string(x["amount"].d()));
+        if (x["auth"].s() == JewelCoin::MASTER_KEY) {
+            jwl.addBlock("Reserve Release: " + std::to_string(x["amount"].d()));
             return crow::response(200, "Success");
         }
         return crow::response(403, "Unauthorized");
     });
 
     std::cout << "------------------------------------------" << std::endl;
-    std::cout << "X-Hybrid Node is Live on Port 18081" << std::endl;
+    std::cout << "JewelCoin Node is Live on Port 18081" << std::endl;
     std::cout << "Open index.html to control your assets." << std::endl;
     std::cout << "------------------------------------------" << std::endl;
 
