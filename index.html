@@ -3,93 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JewelCoin AI Sovereign | MAX SPEED</title>
+    <title>JewelCoin AI | Live Value 0.50 USDT</title>
     <style>
         :root { 
-            --primary: #00ffcc; --bg: #0b0b0e; --card: #16161d; 
-            --text: #e0e0e0; --ai-glow: #00d4ff; --danger: #ff4757;
+            --primary: #00ffcc; --bg: #050507; --card: rgba(22, 22, 29, 0.88); 
+            --text: #e0e0e0; --ai-glow: #00d4ff; --danger: #ff4757; --solana: #9945FF; --gold: #ffd700;
         }
 
         body { 
             background: var(--bg); color: var(--text); 
             font-family: 'Segoe UI', sans-serif; 
             margin: 0; display: flex; flex-direction: column; align-items: center; 
-            height: 100vh; justify-content: center; overflow: hidden;
+            min-height: 100vh; justify-content: center; overflow-x: hidden;
         }
 
-        /* ‘«‘… «·ﬁ›· */
+        #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: #050507; }
+
         #lockScreen { 
             position: fixed; inset: 0; background: #000; z-index: 9999; 
-            display: flex; align-items: center; justify-content: center; transition: 0.5s;
+            display: flex; align-items: center; justify-content: center; transition: 0.8s;
         }
-        .lock-box { text-align: center; padding: 40px; border: 1px solid #333; border-radius: 20px; background: #0a0a0a; box-shadow: 0 0 30px rgba(0,255,204,0.1); }
 
-        /* «·»ÿ«ﬁ… «·—∆Ì”Ì… */
+        .lock-box { 
+            text-align: center; padding: 40px; border: 1px solid #333; border-radius: 25px; 
+            background: rgba(10, 10, 10, 0.95); box-shadow: 0 0 60px rgba(0,255,204,0.1); backdrop-filter: blur(10px);
+        }
+
         .card { 
-            background: var(--card); width: 90%; max-width: 420px; padding: 30px; 
-            border-radius: 30px; border: 1px solid #2a2a32;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8); position: relative;
-            transition: transform 0.1s;
+            background: var(--card); width: 92%; max-width: 420px; padding: 25px; 
+            border-radius: 35px; border: 1px solid rgba(0,255,204,0.2);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.9); position: relative;
+            backdrop-filter: blur(25px); margin: 20px 0;
         }
 
+        /*  ‰”Ìﬁ «·⁄œ«œ«  */
+        .balance-label { font-size: 0.7rem; color: #888; text-transform: uppercase; letter-spacing: 2px; margin-bottom: -10px; }
         .balance { 
-            font-size: 3.2rem; color: var(--primary); font-weight: 800; 
-            text-align: center; margin: 20px 0; font-family: 'Courier New', monospace;
-            text-shadow: 0 0 15px rgba(0,255,204,0.5);
+            font-size: 3rem; color: var(--primary); font-weight: 900; 
+            text-align: center; margin: 10px 0; font-family: 'Courier New', monospace;
+            text-shadow: 0 0 20px rgba(0,255,204,0.4);
+        }
+        .value-box { 
+            background: rgba(0,255,204,0.05); padding: 10px; border-radius: 15px; 
+            border: 1px solid rgba(0,255,204,0.1); text-align: center; margin-bottom: 20px;
+        }
+        .value-text { color: var(--gold); font-weight: bold; font-family: monospace; font-size: 1.2rem; }
+
+        .status-box, .transfer-box { background: rgba(0,0,0,0.4); padding: 18px; border-radius: 22px; margin-top: 15px; border: 1px solid #222; }
+        
+        button { width: 100%; padding: 16px; border-radius: 15px; border: none; cursor: pointer; font-weight: 800; margin-top: 10px; font-family: inherit; transition: 0.3s; text-transform: uppercase; }
+        .btn-prime { background: var(--primary); color: #000; box-shadow: 0 4px 15px rgba(0,255,204,0.3); }
+        .btn-stop { background: var(--danger); color: #fff; }
+        .btn-sol { background: var(--solana); color: #fff; margin-top: 15px; }
+
+        input, select { 
+            width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #444; 
+            background: rgba(0,0,0,0.6); color: #fff; margin-bottom: 12px; 
+            text-align: center; font-size: 0.85rem; outline: none; box-sizing: border-box;
         }
 
-        .status-box { background: #1a1a24; padding: 20px; border-radius: 20px; margin-top: 15px; border: 1px solid #333; }
-        
-        button { width: 100%; padding: 16px; border-radius: 15px; border: none; cursor: pointer; font-weight: bold; margin-top: 12px; font-family: inherit; transition: 0.2s; text-transform: uppercase; letter-spacing: 1px; }
-        .btn-prime { background: var(--primary); color: #000; }
-        .btn-ai { background: var(--ai-glow); color: #000; display: none; border: 2px solid transparent; }
-        
-        /*  √ÀÌ— «·«Â “«“ ⁄‰œ «·”—⁄… «·ﬁ’ÊÏ */
-        @keyframes shake {
-            0% { transform: translate(1px, 1px) rotate(0deg); }
-            20% { transform: translate(-1px, -2px) rotate(-1deg); }
-            50% { transform: translate(-3px, 0px) rotate(1deg); }
-            100% { transform: translate(1px, 1px) rotate(0deg); }
-        }
-        .overclocking { animation: shake 0.2s infinite; border-color: var(--danger) !important; }
-
-        input { width: 100%; padding: 15px; border-radius: 10px; border: 1px solid #333; background: #000; color: #fff; margin-bottom: 15px; text-align: center; font-size: 1.1rem; outline: none; }
-        .address-box { background: #000; padding: 12px; border-radius: 12px; font-size: 0.7rem; color: #555; word-break: break-all; text-align: center; border: 1px dashed #333; }
+        .overclocking { animation: shake 0.1s infinite; border-color: var(--danger) !important; }
+        @keyframes shake { 0% { transform: translate(1px, 1px); } 50% { transform: translate(-1px, -1px); } 100% { transform: translate(1px, -1px); } }
     </style>
 </head>
 <body>
 
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Lock Screen -->
     <div id="lockScreen">
         <div class="lock-box">
-            <h2 style="color:var(--primary); margin-bottom:5px;">TERMINAL ACCESS</h2>
-            <p style="color:#666; font-size:0.8rem; margin-bottom:20px;">ENTER KEYCODE: 2026</p>
-            <input type="password" id="walletPass" placeholder="ïïïï">
-            <button class="btn-prime" onclick="unlockWallet()">Authorize</button>
+            <h2 style="color:var(--primary); margin-bottom:5px; letter-spacing:5px;">JEWEL VAULT</h2>
+            <input type="password" id="walletPass" placeholder="PASSCODE (2026)">
+            <button class="btn-prime" onclick="unlockWallet()">DECRYPT CORE</button>
         </div>
     </div>
 
     <div class="card" id="mainCard">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-            <h2 style="margin:0; font-size:1.2rem; letter-spacing:2px; color:white;">JEWEL<span style="color:var(--primary)">COIN</span></h2>
-            <span id="coreTag" style="color:#2ecc71; font-size:0.6rem; border:1px solid #2ecc71; padding:2px 8px; border-radius:10px;">V.2026 ONLINE</span>
+        <!-- Header -->
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+            <div>
+                <h2 style="margin:0; font-size:1.1rem; letter-spacing:3px; color:white;">JEWEL<span style="color:var(--primary)">COIN</span></h2>
+                <div style="font-size:0.6rem; color:var(--gold); font-weight:bold;">PRICE: 0.50 USDT</div>
+            </div>
+            <span id="coreTag" style="color:#2ecc71; font-size:0.55rem; border:1px solid #2ecc71; padding:2px 8px; border-radius:15px;">AI-ENCRYPTED</span>
         </div>
 
+        <!-- Balance Display -->
+        <div class="balance-label">Total Mined</div>
         <div class="balance" id="bal">0.000000</div>
-        <div class="address-box">NODE_ID: AI_OPTIMIZED_SVR_2026_MAX</div>
+        
+        <!-- Value Display -->
+        <div class="value-box">
+            <span style="font-size:0.6rem; color:#888; display:block; text-transform:uppercase;">Estimated Value</span>
+            <span class="value-text" id="valUsdt">0.00 USDT</span>
+        </div>
 
+        <!-- Mining Controls -->
         <div class="status-box">
-            <div style="display: flex; justify-content: space-between; font-size: 0.7rem; margin-bottom:10px;">
-                <span>AI ENGINE: <b id="aiMode" style="color:var(--ai-glow)">STANDBY</b></span>
-                <span id="cpuStatus" style="color:#888;">TEMP: 32∞C</span>
+            <div style="display: flex; justify-content: space-between; font-size: 0.65rem; margin-bottom:10px; color:#888;">
+                <span>AI STATUS: <b id="aiMode" style="color:var(--ai-glow)">IDLE</b></span>
+                <span id="cpuStatus">LOAD: 0%</span>
             </div>
-            
-            <button class="btn-prime" id="mineBtn" onclick="toggleMining()">Initiate Mining</button>
-            <button class="btn-ai" id="boostBtn" onclick="activateMaxSpeed()">OVERCLOCK (MAX SPEED)</button>
+            <button class="btn-prime" id="mineBtn" onclick="toggleMining()">START MINER</button>
+            <button id="boostBtn" style="display:none; background:var(--ai-glow); color:#000; font-size:0.8rem;" onclick="activateMaxSpeed()">MAX OVERCLOCK (2X)</button>
+        </div>
+
+        <!-- Transfer Section -->
+        <div class="transfer-box">
+            <h4 style="margin:0 0 12px 0; font-size:0.7rem; color:var(--solana); letter-spacing:2px; text-align:center;">WITHDRAW TO SOLANA</h4>
+            <input type="text" id="solAddress" placeholder="Solana Wallet Address">
+            <select id="networkSelect">
+                <option value="solana">Solana (Mainnet-Beta)</option>
+                <option value="devnet">Solana (Devnet Test)</option>
+            </select>
+            <button class="btn-sol" onclick="sendTransaction()">Transfer Mined Coins</button>
         </div>
     </div>
 
     <script>
+        // --- Diamond Background ---
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let jewels = [];
+
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.onresize = resize; resize();
+
+        class Jewel {
+            constructor() { this.reset(); this.y = Math.random() * canvas.height; }
+            reset() {
+                this.x = Math.random() * canvas.width; this.y = -50;
+                this.size = Math.random() * 6 + 3; this.speed = Math.random() * 0.8 + 0.2;
+                this.angle = Math.random() * Math.PI * 2; this.spin = Math.random() * 0.015;
+            }
+            draw() {
+                ctx.save(); ctx.translate(this.x, this.y); ctx.rotate(this.angle);
+                ctx.beginPath(); ctx.moveTo(0, -this.size); ctx.lineTo(this.size, 0); ctx.lineTo(0, this.size); ctx.lineTo(-this.size, 0); ctx.closePath();
+                ctx.fillStyle = '#00ffcc'; ctx.globalAlpha = 0.2; ctx.fill(); ctx.restore();
+            }
+            update() { 
+                this.y += this.speed; this.angle += this.spin; 
+                if (this.y > canvas.height + 50) this.reset(); 
+            }
+        }
+
+        for (let i = 0; i < 25; i++) jewels.push(new Jewel());
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            jewels.forEach(j => { j.update(); j.draw(); });
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // --- Core Logic ---
         let balance = 0.0;
+        const PRICE_PER_COIN = 0.50; // ”⁄— «·⁄„·… »«·œÊ·«—
         let isMining = false;
         let isMaxSpeed = false;
         let engine;
@@ -98,60 +167,73 @@
             if (document.getElementById('walletPass').value === "2026") {
                 document.getElementById('lockScreen').style.opacity = '0';
                 setTimeout(() => document.getElementById('lockScreen').style.display = 'none', 500);
-            } else { alert("ACCESS DENIED"); }
+            } else { alert("INVALID ACCESS CODE"); }
+        }
+
+        function updateDisplay() {
+            document.getElementById('bal').innerText = balance.toFixed(6);
+            const valueUsdt = balance * PRICE_PER_COIN;
+            document.getElementById('valUsdt').innerText = valueUsdt.toFixed(2) + " USDT";
         }
 
         function toggleMining() {
-            isMining = !isMining;
             const btn = document.getElementById('mineBtn');
             const boost = document.getElementById('boostBtn');
             const mode = document.getElementById('aiMode');
+            const card = document.getElementById('mainCard');
 
-            if(isMining) {
-                btn.innerText = "Terminate Engine";
-                btn.style.background = "#ff4757";
-                mode.innerText = "ACTIVE";
+            if(!isMining) {
+                isMining = true;
+                btn.innerText = "SHUTDOWN MINER";
+                btn.className = "btn-stop";
+                mode.innerText = "MINING...";
                 boost.style.display = "block";
-                runEngine(100); // ”—⁄… ⁄«œÌ…
+                runEngine(100);
             } else {
-                location.reload(); // ≈⁄«œ… ÷»ÿ «·‰Ÿ«„ ⁄‰œ «·≈Ìﬁ«›
+                isMining = false;
+                isMaxSpeed = false;
+                clearInterval(engine);
+                btn.innerText = "START MINER";
+                btn.className = "btn-prime";
+                mode.innerText = "IDLE";
+                boost.style.display = "none";
+                card.classList.remove('overclocking');
+                document.getElementById('cpuStatus').innerText = "LOAD: 0%";
+                jewels.forEach(j => j.speed = Math.random() * 0.8 + 0.2);
             }
         }
 
         function runEngine(ms) {
             clearInterval(engine);
             engine = setInterval(() => {
-                // “Ì«œ… «·√—ﬁ«„
-                let add = isMaxSpeed ? (Math.random() * 50.08) : (Math.random() * 50.001);
+                let add = isMaxSpeed ? (Math.random() * 0.12) : (Math.random() * 0.004);
                 balance += add;
-                document.getElementById('bal').innerText = balance.toFixed(6);
+                updateDisplay();
+                if(isMaxSpeed) {
+                    document.getElementById('cpuStatus').innerText = "TEMP: " + (88 + Math.floor(Math.random()*10)) + "∞C";
+                } else {
+                    document.getElementById('cpuStatus').innerText = "LOAD: " + (Math.random()*45).toFixed(1) + "%";
+                }
             }, ms);
         }
 
         function activateMaxSpeed() {
             isMaxSpeed = true;
-            const card = document.getElementById('mainCard');
-            const boostBtn = document.getElementById('boostBtn');
-            const temp = document.getElementById('cpuStatus');
-            const mode = document.getElementById('aiMode');
-            const core = document.getElementById('coreTag');
+            document.getElementById('mainCard').classList.add('overclocking');
+            document.getElementById('aiMode').innerText = "HYPER-DRIVE";
+            document.getElementById('aiMode').style.color = "var(--danger)";
+            jewels.forEach(j => j.speed = 10);
+            runEngine(20);
+        }
 
-            card.classList.add('overclocking'); //  ›⁄Ì· «·«Â “«“
-            boostBtn.innerText = "ULTRA POWER ACTIVE";
-            boostBtn.style.background = "#fff";
-            boostBtn.style.boxShadow = "0 0 30px #00d4ff";
-            
-            mode.innerText = "HYPER-DRIVE";
-            mode.style.color = "#ff4757";
-            
-            temp.innerText = "TEMP: 94∞C";
-            temp.style.color = "#ff4757";
-
-            core.innerText = "CRITICAL LOAD";
-            core.style.borderColor = "#ff4757";
-            core.style.color = "#ff4757";
-
-            runEngine(10); // «·”—⁄… «·ﬁ’ÊÏ ( ÕœÌÀ ﬂ· 10 „·Ì À«‰Ì…)
+        function sendTransaction() {
+            const addr = document.getElementById('solAddress').value;
+            if(addr.length < 32) {
+                alert("Enter a valid Solana address");
+                return;
+            }
+            const val = balance * PRICE_PER_COIN;
+            alert("Transfer Request Sent!\nTotal: " + balance.toFixed(4) + " JWL\nValue: " + val.toFixed(2) + " USDT\nStatus: Initializing Smart Contract...");
         }
     </script>
 </body>
