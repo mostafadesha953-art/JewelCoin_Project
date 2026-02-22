@@ -1,0 +1,41 @@
+# ÇÓÊÎÏÇã ÃÍÏË äÓÎÉ ãÓÊŞÑÉ ãä äÙÇã ÈäÇÁ ÇáÚãáÇÊ áÚÇã 2026
+FROM ubuntu:24.04
+
+# ÊËÈíÊ ÇáÃÏæÇÊ ÇááÇÒãÉ áÈäÇÁ ÊÔİíÑ ÈíÊßæíä æãæäíÑæ
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    cmake \
+    libboost-all-dev \
+    libssl-dev \
+    libzmq3-dev \
+    libunbound-dev \
+    libsodium-dev \
+    libunwind8-dev \
+    liblzma-dev \
+    libreadline6-dev \
+    libldns-dev \
+    libexpat1-dev \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# ÅäÔÇÁ ãÌáÏ ÇáÚãá ááÚãáÉ ÇáÌÏíÏÉ Jewel
+WORKDIR /crypto_project
+
+# ÌáÈ ãßÊÈÉ RandomX (ÊÔİíÑ ãæäíÑæ ÇáãÚÊãÏ Úáì CPU)
+RUN git clone https://github.com && \
+    cd RandomX && mkdir build && cd build && \
+    cmake .. && make
+
+# äÓÎ ãáİÇÊ ÇáÅÚÏÇÏÇÊ æÇáßÊáÉ ÇáÊí ÃäÔÃäÇåÇ ÓÇÈŞÇ
+COPY src/config.h ./src/config.h
+COPY src/genesis.cpp ./src/genesis.cpp
+
+# ÃãÑ ÈäÇÁ ÇáãÍİÙÉ (ÇáÜ Daemon)
+# ãáÇÍÙÉ: åĞÇ ÇáÃãÑ ÇİÊÑÇÖí æíÊØáÈ æÌæÏ ãáİÇÊ ÇáÑÈØ ÇáÃÓÇÓíÉ (MakeFile)
+RUN echo "Building JewelCoin Daemon with Privacy Protocols..."
+
+# İÊÍ ÇáãäÇİĞ (Ports) áÔÈßÉ ÇáÚãáÉ æÇáãÍİÙÉ
+EXPOSE 18080 18081
+
+# ÊÔÛíá ÇáÚãáÉ İæÑ ÊÔÛíá ÇáÍÇæíÉ
+CMD ["./JewelCoin-daemon", "--log-level", "1"]

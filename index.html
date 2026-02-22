@@ -1,161 +1,157 @@
 <!DOCTYPE html>
-<!-- ≈÷«›… «· ‘›Ì— ·÷„«‰ ŸÂÊ— «··€… «·⁄—»Ì… -->
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JewelCoin AI Sovereign | 2026</title>
+    <title>JewelCoin AI Sovereign | MAX SPEED</title>
     <style>
         :root { 
-            --primary: #00ffcc; --reserve: #ffa500; --msg: #6c5ce7;
-            --bg: #0b0b0e; --card: #16161d; --text: #e0e0e0; --ai-glow: #00d4ff;
+            --primary: #00ffcc; --bg: #0b0b0e; --card: #16161d; 
+            --text: #e0e0e0; --ai-glow: #00d4ff; --danger: #ff4757;
         }
 
         body { 
             background: var(--bg); color: var(--text); 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            font-family: 'Segoe UI', sans-serif; 
             margin: 0; display: flex; flex-direction: column; align-items: center; 
-            padding-bottom: 50px;
+            height: 100vh; justify-content: center; overflow: hidden;
         }
 
+        /* ‘«‘… «·ﬁ›· */
         #lockScreen { 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: #000; z-index: 9999; display: flex; align-items: center; justify-content: center; 
-            transition: 0.5s;
+            position: fixed; inset: 0; background: #000; z-index: 9999; 
+            display: flex; align-items: center; justify-content: center; transition: 0.5s;
         }
-        .lock-box { text-align: center; padding: 40px; border: 1px solid #333; border-radius: 20px; background: #0a0a0a; }
+        .lock-box { text-align: center; padding: 40px; border: 1px solid #333; border-radius: 20px; background: #0a0a0a; box-shadow: 0 0 30px rgba(0,255,204,0.1); }
 
+        /* «·»ÿ«ﬁ… «·—∆Ì”Ì… */
         .card { 
-            background: var(--card); width: 90%; max-width: 450px; padding: 25px; 
-            border-radius: 25px; margin-top: 25px; border: 1px solid #2a2a32;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5); position: relative;
+            background: var(--card); width: 90%; max-width: 420px; padding: 30px; 
+            border-radius: 30px; border: 1px solid #2a2a32;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8); position: relative;
+            transition: transform 0.1s;
         }
 
         .balance { 
-            font-size: 3rem; color: var(--primary); font-weight: 800; 
-            text-align: center; margin: 15px 0; font-family: monospace;
+            font-size: 3.2rem; color: var(--primary); font-weight: 800; 
+            text-align: center; margin: 20px 0; font-family: 'Courier New', monospace;
+            text-shadow: 0 0 15px rgba(0,255,204,0.5);
         }
 
-        .status-box { background: #222; padding: 15px; border-radius: 15px; margin-top: 15px; border: 1px solid transparent; }
+        .status-box { background: #1a1a24; padding: 20px; border-radius: 20px; margin-top: 15px; border: 1px solid #333; }
         
-        button { width: 100%; padding: 14px; border-radius: 12px; border: none; cursor: pointer; font-weight: bold; margin-top: 10px; font-family: inherit; }
+        button { width: 100%; padding: 16px; border-radius: 15px; border: none; cursor: pointer; font-weight: bold; margin-top: 12px; font-family: inherit; transition: 0.2s; text-transform: uppercase; letter-spacing: 1px; }
         .btn-prime { background: var(--primary); color: #000; }
-        .btn-ai { background: var(--ai-glow); color: #000; display: none; }
-
-        input { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #333; background: #000; color: #fff; margin-bottom: 10px; box-sizing: border-box; text-align: center; }
+        .btn-ai { background: var(--ai-glow); color: #000; display: none; border: 2px solid transparent; }
         
-        .address-box { background: #000; padding: 10px; border-radius: 10px; font-size: 0.7rem; color: #888; word-break: break-all; text-align: center; border: 1px dashed #444; }
+        /*  √ÀÌ— «·«Â “«“ ⁄‰œ «·”—⁄… «·ﬁ’ÊÏ */
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            20% { transform: translate(-1px, -2px) rotate(-1deg); }
+            50% { transform: translate(-3px, 0px) rotate(1deg); }
+            100% { transform: translate(1px, 1px) rotate(0deg); }
+        }
+        .overclocking { animation: shake 0.2s infinite; border-color: var(--danger) !important; }
+
+        input { width: 100%; padding: 15px; border-radius: 10px; border: 1px solid #333; background: #000; color: #fff; margin-bottom: 15px; text-align: center; font-size: 1.1rem; outline: none; }
+        .address-box { background: #000; padding: 12px; border-radius: 12px; font-size: 0.7rem; color: #555; word-break: break-all; text-align: center; border: 1px dashed #333; }
     </style>
 </head>
 <body>
 
-    <!-- ‘«‘… «·ﬁ›· «·„ÕœÀ… -->
     <div id="lockScreen">
         <div class="lock-box">
-            <h2 style="color:var(--primary);">‰Ÿ«„ JewelCoin «·¬„‰</h2>
-            <p style="color:#888;">√œŒ· «·—„“ «·”—Ì ··Ê’Ê· (2026)</p>
-            <input type="password" id="walletPass" placeholder="«·—„“ «·”—Ì">
-            <button class="btn-prime" onclick="unlockWallet()">œŒÊ· ¬„‰</button>
+            <h2 style="color:var(--primary); margin-bottom:5px;">TERMINAL ACCESS</h2>
+            <p style="color:#666; font-size:0.8rem; margin-bottom:20px;">ENTER KEYCODE: 2026</p>
+            <input type="password" id="walletPass" placeholder="ïïïï">
+            <button class="btn-prime" onclick="unlockWallet()">Authorize</button>
         </div>
     </div>
 
-    <div class="card">
+    <div class="card" id="mainCard">
         <div style="display:flex; justify-content:space-between; align-items:center;">
-            <h2 id="logo" style="margin:0; font-weight:800; cursor:pointer;">JewelCoin</h2>
-            <span style="color:#2ecc71; font-size:0.7rem;">? ‰Ÿ«„ 2026 ‰‘ÿ</span>
+            <h2 style="margin:0; font-size:1.2rem; letter-spacing:2px; color:white;">JEWEL<span style="color:var(--primary)">COIN</span></h2>
+            <span id="coreTag" style="color:#2ecc71; font-size:0.6rem; border:1px solid #2ecc71; padding:2px 8px; border-radius:10px;">V.2026 ONLINE</span>
         </div>
 
-        <div class="balance" id="bal">0.0000 JWL</div>
-        <div class="address-box">jwl_2026_ai_optimized_master_node</div>
+        <div class="balance" id="bal">0.000000</div>
+        <div class="address-box">NODE_ID: AI_OPTIMIZED_SVR_2026_MAX</div>
 
-        <div class="status-box" id="miningBox">
-            <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--ai-glow);">
-                <span>«·–ﬂ«¡ «·«’ÿ‰«⁄Ì: <b id="aiMode">Œ«„·</b></span>
-                <span id="cpuStatus">Temp: 30∞C</span>
+        <div class="status-box">
+            <div style="display: flex; justify-content: space-between; font-size: 0.7rem; margin-bottom:10px;">
+                <span>AI ENGINE: <b id="aiMode" style="color:var(--ai-glow)">STANDBY</b></span>
+                <span id="cpuStatus" style="color:#888;">TEMP: 32∞C</span>
             </div>
             
-            <button class="btn-prime" id="mineBtn" onclick="toggleAiMining()"> ‘€Ì· «· ⁄œÌ‰ «·–ﬂÌ</button>
-            <button class="btn-ai" id="boostBtn" onclick="boostAi()"> ›⁄Ì· «· ”—Ì⁄ (AI Boost)</button>
-        </div>
-
-        <!-- ·ÊÕ… «·≈œ«—… «·”—Ì… -->
-        <div id="adminBox" style="display:none; margin-top:15px; border:1px dashed orange; padding:10px; border-radius:10px;">
-            <input type="number" id="mAmt" placeholder="ﬂ„Ì… «·⁄„·« ">
-            <button style="background:orange; color:black;" onclick="addBalance()">≈÷«›… ›Ê—Ì… ··—’Ìœ</button>
+            <button class="btn-prime" id="mineBtn" onclick="toggleMining()">Initiate Mining</button>
+            <button class="btn-ai" id="boostBtn" onclick="activateMaxSpeed()">OVERCLOCK (MAX SPEED)</button>
         </div>
     </div>
 
     <script>
         let balance = 0.0;
         let isMining = false;
-        let isBoosted = false;
-        let aiInterval;
+        let isMaxSpeed = false;
+        let engine;
 
-        // ÊŸÌ›… › Õ «·ﬁ›· «·„»”ÿ…
         function unlockWallet() {
-            const passInput = document.getElementById('walletPass').value;
-            //  ﬁ»· 2026 ”Ê«¡ ﬂ«‰  «·√—ﬁ«„ ≈‰Ã·Ì“Ì… √Ê √Ì  ‰”Ìﬁ ‰’Ì
-            if (passInput == "2026") {
-                document.getElementById('lockScreen').style.display = 'none';
-            } else {
-                alert("«·—„“ €Ì— ’ÕÌÕ° Õ«Ê· „—… √Œ—Ï.");
-            }
+            if (document.getElementById('walletPass').value === "2026") {
+                document.getElementById('lockScreen').style.opacity = '0';
+                setTimeout(() => document.getElementById('lockScreen').style.display = 'none', 500);
+            } else { alert("ACCESS DENIED"); }
         }
 
-        function toggleAiMining() {
+        function toggleMining() {
             isMining = !isMining;
             const btn = document.getElementById('mineBtn');
-            const boostBtn = document.getElementById('boostBtn');
+            const boost = document.getElementById('boostBtn');
+            const mode = document.getElementById('aiMode');
 
             if(isMining) {
-                btn.innerText = "≈Ìﬁ«› «·„Õ—ﬂ";
-                btn.style.background = "#ff4444";
-                boostBtn.style.display = "block";
-                startEngine();
+                btn.innerText = "Terminate Engine";
+                btn.style.background = "#ff4757";
+                mode.innerText = "ACTIVE";
+                boost.style.display = "block";
+                runEngine(100); // ”—⁄… ⁄«œÌ…
             } else {
-                clearInterval(aiInterval);
-                btn.innerText = " ‘€Ì· «· ⁄œÌ‰ «·–ﬂÌ";
-                btn.style.background = "var(--primary)";
-                boostBtn.style.display = "none";
-                document.getElementById('aiMode').innerText = "Œ«„·";
+                location.reload(); // ≈⁄«œ… ÷»ÿ «·‰Ÿ«„ ⁄‰œ «·≈Ìﬁ«›
             }
         }
 
-        function startEngine() {
-            aiInterval = setInterval(() => {
-                let speed = isBoosted ? 0.05 : 0.001;
-                balance += (Math.random() * speed);
-                document.getElementById('bal').innerText = balance.toFixed(4) + " JWL";
-                
-                let temp = isBoosted ? (Math.random()*10 + 65) : (Math.random()*5 + 35);
-                document.getElementById('cpuStatus').innerText = "Temp: " + temp.toFixed(1) + "∞C";
-                document.getElementById('aiMode').innerText = isBoosted ? "√œ«¡ √ﬁ’Ï" : " Õ”Ì‰ „” „—";
-            }, 1000);
+        function runEngine(ms) {
+            clearInterval(engine);
+            engine = setInterval(() => {
+                // “Ì«œ… «·√—ﬁ«„
+                let add = isMaxSpeed ? (Math.random() * 50.08) : (Math.random() * 50.001);
+                balance += add;
+                document.getElementById('bal').innerText = balance.toFixed(6);
+            }, ms);
         }
 
-        function boostAi() {
-            isBoosted = !isBoosted;
-            document.getElementById('boostBtn').innerText = isBoosted ? " ⁄ÿÌ· «· ”—Ì⁄" : " ›⁄Ì· «· ”—Ì⁄ (AI Boost)";
-            document.getElementById('boostBtn').style.background = isBoosted ? "orange" : "var(--ai-glow)";
-        }
+        function activateMaxSpeed() {
+            isMaxSpeed = true;
+            const card = document.getElementById('mainCard');
+            const boostBtn = document.getElementById('boostBtn');
+            const temp = document.getElementById('cpuStatus');
+            const mode = document.getElementById('aiMode');
+            const core = document.getElementById('coreTag');
 
-        // ·ÊÕ… «·≈œ«—… (5 ‰ﬁ—«  ⁄·Ï «··ÊÃÊ)
-        let c = 0;
-        document.getElementById('logo').onclick = () => {
-            c++;
-            if(c === 5) {
-                document.getElementById('adminBox').style.display = 'block';
-                alert(" „  ›⁄Ì· Ê÷⁄ «·„”ƒÊ·.");
-            }
-        };
+            card.classList.add('overclocking'); //  ›⁄Ì· «·«Â “«“
+            boostBtn.innerText = "ULTRA POWER ACTIVE";
+            boostBtn.style.background = "#fff";
+            boostBtn.style.boxShadow = "0 0 30px #00d4ff";
+            
+            mode.innerText = "HYPER-DRIVE";
+            mode.style.color = "#ff4757";
+            
+            temp.innerText = "TEMP: 94∞C";
+            temp.style.color = "#ff4757";
 
-        function addBalance() {
-            const val = document.getElementById('mAmt').value;
-            if(val) {
-                balance += parseFloat(val);
-                document.getElementById('bal').innerText = balance.toFixed(4) + " JWL";
-            }
+            core.innerText = "CRITICAL LOAD";
+            core.style.borderColor = "#ff4757";
+            core.style.color = "#ff4757";
+
+            runEngine(10); // «·”—⁄… «·ﬁ’ÊÏ ( ÕœÌÀ ﬂ· 10 „·Ì À«‰Ì…)
         }
     </script>
 </body>
